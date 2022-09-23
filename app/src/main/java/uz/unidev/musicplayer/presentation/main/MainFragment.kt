@@ -2,7 +2,9 @@ package uz.unidev.musicplayer.presentation.main
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.app.AlertDialog
 import android.content.pm.PackageManager
+import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
@@ -13,11 +15,14 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dagger.hilt.android.AndroidEntryPoint
 import uz.unidev.musicplayer.R
 import uz.unidev.musicplayer.data.models.Music
 import uz.unidev.musicplayer.databinding.FragmentMainBinding
+import uz.unidev.musicplayer.presentation.player.PlayerFragment
 import java.io.File
+import kotlin.system.exitProcess
 
 /**
  *  Created by Nurlibay Koshkinbaev on 22/09/2022 19:07
@@ -88,7 +93,24 @@ class MainFragment : Fragment(R.layout.fragment_main) {
                     Toast.makeText(requireContext(), "About", Toast.LENGTH_SHORT).show()
                 }
                 R.id.navExit -> {
-                    requireActivity().finish()
+                    val builder = MaterialAlertDialogBuilder(requireContext())
+                    builder.setTitle("Exit")
+                        .setMessage("Do you want to close app?")
+                        .setPositiveButton("YES"){ _, _ ->
+                            if(PlayerFragment.musicService != null) {
+                                PlayerFragment.musicService!!.stopForeground(true)
+                                PlayerFragment.musicService!!.mediaPlayer!!.release()
+                                PlayerFragment.musicService = null
+                            }
+                            exitProcess(1)
+                        }
+                        .setNegativeButton("NO"){ dialog, _ ->
+                            dialog.dismiss()
+                        }
+                    val customDialog = builder.create()
+                    customDialog.show()
+                    customDialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.RED)
+                    customDialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.RED)
                 }
             }
             menuItem.isChecked = true
@@ -171,5 +193,15 @@ class MainFragment : Fragment(R.layout.fragment_main) {
     override fun onResume() {
         super.onResume()
         binding.initRV()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        if(!PlayerFragment.isPlaying && PlayerFragment.musicService != null){
+            PlayerFragment.musicService!!.stopForeground(true)
+            PlayerFragment.musicService!!.mediaPlayer!!.release()
+            PlayerFragment.musicService = null
+            exitProcess(1)
+        }
     }
 }

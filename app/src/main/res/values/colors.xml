@@ -9,5 +9,6 @@
     <color name="white">#FFFFFFFF</color>
 
     <color name="main_color">#F5F5F5</color>
+    <color name="color_pink">#E91E63</color>
 
 </resources>

@@ -10,7 +10,9 @@ import android.os.Bundle
 import android.os.IBinder
 import android.view.View
 import android.widget.SeekBar
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
@@ -34,6 +36,7 @@ class PlayerFragment : Fragment(R.layout.fragment_player), ServiceConnection, Me
         var musicService: MusicService? = null
         @SuppressLint("StaticFieldLeak")
         lateinit var binding: FragmentPlayerBinding
+        var repeat: Boolean = false
     }
 
     private val navArgs: PlayerFragmentArgs by navArgs()
@@ -62,6 +65,18 @@ class PlayerFragment : Fragment(R.layout.fragment_player), ServiceConnection, Me
             override fun onStartTrackingTouch(p0: SeekBar?) = Unit
             override fun onStopTrackingTouch(p0: SeekBar?) = Unit
         })
+        binding.btnRepeat.setOnClickListener {
+            if(!repeat){
+                repeat = true
+                binding.btnRepeat.setColorFilter(ContextCompat.getColor(requireContext(), R.color.purple_500))
+            } else {
+                repeat = false
+                binding.btnRepeat.setColorFilter(ContextCompat.getColor(requireContext(), R.color.color_pink))
+            }
+        }
+        binding.ivBack.setOnClickListener {
+            findNavController().navigateUp()
+        }
     }
 
     private fun prevPlayNextButtonClicks() {
@@ -116,6 +131,8 @@ class PlayerFragment : Fragment(R.layout.fragment_player), ServiceConnection, Me
             .into(binding.ivMusicImage)
 
         binding.tvSongName.text = musicList[songPosition].title
+        if(repeat) binding.btnRepeat.setColorFilter(ContextCompat.getColor(requireContext(), R.color.purple_500))
+
     }
 
     private fun playMusic() {
