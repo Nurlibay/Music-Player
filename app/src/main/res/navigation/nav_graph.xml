@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/splashFragment">
+
+    <fragment
+        android:id="@+id/splashFragment"
+        android:name="uz.unidev.musicplayer.presentation.splash.SplashFragment"
+        android:label="SplashFragment"
+        app:launchSingleTop="true"
+        app:popUpTo="@id/nav_graph"
+        app:popUpToInclusive="true"
+        tools:layout="@layout/fragment_splash">
+        <action
+            android:id="@+id/action_splashFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="uz.unidev.musicplayer.presentation.main.MainFragment"
+        android:label="MainFragment"
+        tools:layout="@layout/fragment_main">
+        <action
+            android:id="@+id/action_mainFragment_to_favouriteFragment"
+            app:destination="@id/favouriteFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_playlistFragment"
+            app:destination="@id/playlistFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_playerFragment"
+            app:destination="@id/playerFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/favouriteFragment"
+        android:name="uz.unidev.musicplayer.presentation.favourite.FavouriteFragment"
+        android:label="FavouriteFragment"
+        tools:layout="@layout/fragment_favourite" />
+
+    <fragment
+        android:id="@+id/playlistFragment"
+        android:name="uz.unidev.musicplayer.presentation.playlist.PlaylistFragment"
+        android:label="PlaylistFragment"
+        tools:layout="@layout/fragment_playlist" />
+    <fragment
+        android:id="@+id/feedbackFragment"
+        android:name="uz.unidev.musicplayer.presentation.feedback.FeedbackFragment"
+        android:label="FeedbackFragment" />
+    <fragment
+        android:id="@+id/playerFragment"
+        android:name="uz.unidev.musicplayer.presentation.player.PlayerFragment"
+        android:label="PlayerFragment"
+        tools:layout="@layout/fragment_player"
+        >
+        <argument
+            android:name="position"
+            app:argType="integer"
+            android:defaultValue="0" />
+        <argument
+            android:name="musics"
+            app:argType="uz.unidev.musicplayer.data.models.Music[]" />
+    </fragment>
+
+</navigation>

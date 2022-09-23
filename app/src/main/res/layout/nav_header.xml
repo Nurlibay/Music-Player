@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="170dp"
+    android:background="#E91E63"
+    android:orientation="vertical"
+    android:padding="@dimen/margin_standard">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/music_player_icon"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Welcome to you"
+        android:textSize="24sp"
+        android:textColor="@color/white"
+        />
+
+</androidx.appcompat.widget.LinearLayoutCompat>
