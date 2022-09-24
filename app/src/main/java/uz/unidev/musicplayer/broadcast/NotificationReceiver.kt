@@ -7,6 +7,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import uz.unidev.musicplayer.R
 import uz.unidev.musicplayer.app.App
+import uz.unidev.musicplayer.data.models.exitApplication
 import uz.unidev.musicplayer.data.models.setSongPosition
 import uz.unidev.musicplayer.presentation.player.PlayerFragment
 import kotlin.system.exitProcess
@@ -33,10 +34,7 @@ class NotificationReceiver : BroadcastReceiver() {
                 prevNextSong(increment = true, context = context!!)
             }
             App.EXIT -> {
-                PlayerFragment.musicService?.stopForeground(true)
-                PlayerFragment.musicService!!.mediaPlayer!!.release()
-                PlayerFragment.musicService = null
-                exitProcess(1)
+                exitApplication()
             }
         }
     }

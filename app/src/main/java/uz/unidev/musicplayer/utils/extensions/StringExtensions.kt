@@ -11,7 +11,7 @@ fun String.coloredString(query: String?): Spannable {
     if (!this.contains(query)) return spannable
     if (query == this) {
         spannable.setSpan(
-            ForegroundColorSpan(Color.parseColor("#017EF1")),
+            ForegroundColorSpan(Color.RED),
             0, this.length,
             Spannable.SPAN_EXCLUSIVE_INCLUSIVE
         )

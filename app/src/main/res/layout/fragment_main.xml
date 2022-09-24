@@ -251,6 +251,8 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_songs"
                 android:layout_width="match_parent"
+                android:scrollbars="vertical"
+                android:scrollbarThumbVertical="@drawable/ic_checkbox_border"
                 android:layout_height="0dp"
                 android:layout_marginHorizontal="@dimen/margin_middle"
                 android:layout_marginTop="@dimen/margin_middle"
@@ -259,6 +261,17 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_total_songs_counts" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/noSearchResultsFoundText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/no_search_results_found"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

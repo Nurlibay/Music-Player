@@ -9,6 +9,7 @@ import com.bumptech.glide.request.RequestOptions
 import uz.unidev.musicplayer.R
 import uz.unidev.musicplayer.data.models.Music
 import uz.unidev.musicplayer.databinding.ItemMusicBinding
+import uz.unidev.musicplayer.utils.extensions.coloredString
 import uz.unidev.musicplayer.utils.extensions.formatDuration
 
 /**
@@ -24,10 +25,12 @@ class MusicAdapter : RecyclerView.Adapter<MusicAdapter.MusicViewHolder>() {
             notifyDataSetChanged()
         }
 
+    var query: String? = null
+
     inner class MusicViewHolder(private val binding: ItemMusicBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(music: Music) {
-            binding.tvSongName.text = musicList[absoluteAdapterPosition].title
+            binding.tvSongName.text = musicList[absoluteAdapterPosition].title.coloredString(query)
             binding.tvSongAlbum.text = musicList[absoluteAdapterPosition].album
             binding.tvSongDuration.text = formatDuration(musicList[absoluteAdapterPosition].duration)
             Glide.with(binding.root.context)

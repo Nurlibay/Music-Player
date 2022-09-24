@@ -3,6 +3,7 @@ package uz.unidev.musicplayer.data.models
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 import uz.unidev.musicplayer.presentation.player.PlayerFragment
+import kotlin.system.exitProcess
 
 /**
  *  Created by Nurlibay Koshkinbaev on 23/09/2022 12:37
@@ -35,4 +36,13 @@ fun setSongPosition(increment: Boolean) {
             }
         }
     }
+}
+
+fun exitApplication(){
+    if(PlayerFragment.musicService != null) {
+        PlayerFragment.musicService!!.stopForeground(true)
+        PlayerFragment.musicService!!.mediaPlayer!!.release()
+        PlayerFragment.musicService = null
+    }
+    exitProcess(1)
 }
