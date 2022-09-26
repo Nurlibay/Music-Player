@@ -1,17 +1,15 @@
-package uz.unidev.musicplayer.presentation.feedback
+package uz.unidev.musicplayer.presentation.nowplaying
 
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
-import dagger.hilt.android.AndroidEntryPoint
 import uz.unidev.musicplayer.R
 
 /**
- *  Created by Nurlibay Koshkinbaev on 23/09/2022 02:23
+ *  Created by Nurlibay Koshkinbaev on 25/09/2022 19:29
  */
 
-@AndroidEntryPoint
-class FeedbackFragment: Fragment(R.layout.fragment_feedback) {
+class NowPlayingFragment: Fragment(R.layout.fragment_now_playing) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

@@ -1,4 +1,4 @@
-package uz.unidev.musicplayer.broadcast
+package uz.unidev.musicplayer.receivers
 
 import android.content.BroadcastReceiver
 import android.content.Context
@@ -6,11 +6,13 @@ import android.content.Intent
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import uz.unidev.musicplayer.R
-import uz.unidev.musicplayer.app.App
 import uz.unidev.musicplayer.data.models.exitApplication
 import uz.unidev.musicplayer.data.models.setSongPosition
 import uz.unidev.musicplayer.presentation.player.PlayerFragment
-import kotlin.system.exitProcess
+import uz.unidev.musicplayer.utils.Constants.EXIT
+import uz.unidev.musicplayer.utils.Constants.NEXT
+import uz.unidev.musicplayer.utils.Constants.PLAY
+import uz.unidev.musicplayer.utils.Constants.PREVIOUS
 
 /**
  *  Created by Nurlibay Koshkinbaev on 23/09/2022 21:51
@@ -20,20 +22,20 @@ class NotificationReceiver : BroadcastReceiver() {
 
     override fun onReceive(context: Context?, intent: Intent?) {
         when (intent?.action) {
-            App.PREVIOUS -> {
+            PREVIOUS -> {
                 prevNextSong(increment = false, context = context!!)
             }
-            App.PLAY -> {
+            PLAY -> {
                 if (PlayerFragment.isPlaying) {
                     pauseMusic()
                 } else {
                     playMusic()
                 }
             }
-            App.NEXT -> {
+            NEXT -> {
                 prevNextSong(increment = true, context = context!!)
             }
-            App.EXIT -> {
+            EXIT -> {
                 exitApplication()
             }
         }

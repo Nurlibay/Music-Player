@@ -1,5 +1,6 @@
 package uz.unidev.musicplayer.service
 
+import android.annotation.SuppressLint
 import android.app.PendingIntent
 import android.app.Service
 import android.content.Intent
@@ -12,16 +13,22 @@ import android.os.Looper
 import android.support.v4.media.session.MediaSessionCompat
 import androidx.core.app.NotificationCompat
 import uz.unidev.musicplayer.R
-import uz.unidev.musicplayer.app.App
-import uz.unidev.musicplayer.broadcast.NotificationReceiver
+import uz.unidev.musicplayer.receivers.NotificationReceiver
 import uz.unidev.musicplayer.presentation.player.PlayerFragment
+import uz.unidev.musicplayer.utils.Constants.CHANNEL_ID
+import uz.unidev.musicplayer.utils.Constants.EXIT
+import uz.unidev.musicplayer.utils.Constants.NEXT
+import uz.unidev.musicplayer.utils.Constants.PLAY
+import uz.unidev.musicplayer.utils.Constants.PREVIOUS
 import uz.unidev.musicplayer.utils.extensions.formatDuration
 import uz.unidev.musicplayer.utils.extensions.getImageArt
+import javax.inject.Singleton
 
 /**
  *  Created by Nurlibay Koshkinbaev on 23/09/2022 18:10
  */
 
+@Singleton
 class MusicService : Service() {
 
     private var myBinder = MyBinder()
@@ -40,18 +47,18 @@ class MusicService : Service() {
         }
     }
 
+    @SuppressLint("UnspecifiedImmutableFlag")
     fun showNotification(playPauseBtn: Int){
-
-        val prevIntent = Intent(baseContext, NotificationReceiver::class.java).setAction(App.PREVIOUS)
+        val prevIntent = Intent(baseContext, NotificationReceiver::class.java).setAction(PREVIOUS)
         val prevPendingIntent = PendingIntent.getBroadcast(baseContext, 0, prevIntent, PendingIntent.FLAG_UPDATE_CURRENT)
 
-        val playIntent = Intent(baseContext, NotificationReceiver::class.java).setAction(App.PLAY)
+        val playIntent = Intent(baseContext, NotificationReceiver::class.java).setAction(PLAY)
         val playPendingIntent = PendingIntent.getBroadcast(baseContext, 0, playIntent, PendingIntent.FLAG_UPDATE_CURRENT)
 
-        val nextIntent = Intent(baseContext, NotificationReceiver::class.java).setAction(App.NEXT)
+        val nextIntent = Intent(baseContext, NotificationReceiver::class.java).setAction(NEXT)
         val nextPendingIntent = PendingIntent.getBroadcast(baseContext, 0, nextIntent, PendingIntent.FLAG_UPDATE_CURRENT)
 
-        val exitIntent = Intent(baseContext, NotificationReceiver::class.java).setAction(App.EXIT)
+        val exitIntent = Intent(baseContext, NotificationReceiver::class.java).setAction(EXIT)
         val exitPendingIntent = PendingIntent.getBroadcast(baseContext, 0, exitIntent, PendingIntent.FLAG_UPDATE_CURRENT)
 
         val imgArt = getImageArt(PlayerFragment.musicList[PlayerFragment.songPosition].path)
@@ -61,7 +68,7 @@ class MusicService : Service() {
             BitmapFactory.decodeResource(resources, R.drawable.music_player_icon)
         }
 
-        val notification = NotificationCompat.Builder(baseContext, App.CHANNEL_ID)
+        val notification = NotificationCompat.Builder(baseContext, CHANNEL_ID)
             .setContentTitle(PlayerFragment.musicList[PlayerFragment.songPosition].title)
             .setContentText(PlayerFragment.musicList[PlayerFragment.songPosition].artist)
             .setSmallIcon(R.drawable.ic_music)

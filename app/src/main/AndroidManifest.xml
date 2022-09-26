@@ -36,7 +36,7 @@
             android:exported="false"
             />
 
-        <receiver android:name=".broadcast.NotificationReceiver"
+        <receiver android:name=".receivers.NotificationReceiver"
             android:exported="true"
             />
 

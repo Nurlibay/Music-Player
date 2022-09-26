@@ -31,12 +31,12 @@
                 android:id="@+id/play_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_standard"
                 android:text="@string/playlist"
                 android:textColor="@color/black"
-                android:textSize="20sp"
+                android:textSize="22sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/iv_back"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -44,16 +44,16 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/margin_standard"
         android:layout_marginBottom="@dimen/margin_standard"
-        android:backgroundTint="#E91E63"
-        app:icon="@drawable/ic_add"
-        app:iconSize="35dp"
-        app:strokeWidth="2dp"
+        android:backgroundTint="@color/color_pink"
+        android:src="@drawable/ic_add"
         app:iconTint="@color/white"
+        app:tint="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

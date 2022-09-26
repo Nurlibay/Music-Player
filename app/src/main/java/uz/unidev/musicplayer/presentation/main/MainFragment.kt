@@ -30,6 +30,7 @@ import uz.unidev.musicplayer.data.models.exitApplication
 import uz.unidev.musicplayer.databinding.FragmentMainBinding
 import uz.unidev.musicplayer.presentation.player.PlayerFragment
 import uz.unidev.musicplayer.utils.Constants.SPEECH_REQUEST_CODE
+import uz.unidev.musicplayer.utils.extensions.showMessage
 import java.io.File
 
 /**
@@ -159,7 +160,10 @@ class MainFragment : Fragment(R.layout.fragment_main) {
                     navController.navigate(R.id.feedbackFragment)
                 }
                 R.id.navAbout -> {
-                    Toast.makeText(requireContext(), "About", Toast.LENGTH_SHORT).show()
+                   showMessage("About clicked")
+                }
+                R.id.navSettings -> {
+                    showMessage("Settings clicked")
                 }
                 R.id.navExit -> {
                     val builder = MaterialAlertDialogBuilder(requireContext())
